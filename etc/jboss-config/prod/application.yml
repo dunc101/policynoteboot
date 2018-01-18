@@ -1,0 +1,49 @@
+server:
+  port: 8080
+management:
+  security:
+    enabled: false
+DB4:
+  url: jdbc:oracle:thin:@dc1prd-scan:1521/inqprd.ipacc.com
+  username: inquiry_user
+  password: intranet932
+  driverClass: oracle.jdbc.OracleDriver
+  poolName: DB4_DATASOURCE_POOL
+  maxActive: 25
+  initialSize: 3
+  testOnBorrow: true
+  validationQuery: SELECT 1 FROM DUAL
+TGDBSERVER1DataSource:
+  url: jdbc:oracle:thin:@dc1prd-scan:1521/prd1
+  username: polnote_service
+  password: pr0dn0tes
+  driverClass: oracle.jdbc.OracleDriver
+  poolName: TGDBSERVER1_DATASOURCE_POOL
+  maxActive: 25
+  initialSize: 3
+  testOnBorrow: true
+  validationQuery: SELECT 1 FROM DUAL
+TGDBSERVER2DataSource:
+  url: jdbc:oracle:thin:@dc1prd-scan:1521/prd2
+  username: polnote_service
+  password: pr0dn0tes
+  driverClass: oracle.jdbc.OracleDriver
+  poolName: TGDBSERVER2_DATASOURCE_POOL
+  maxActive: 25
+  initialSize: 3
+  testOnBorrow: true
+  validationQuery: SELECT 1 FROM DUAL
+TGDBSERVER3DataSource:
+  url: jdbc:oracle:thin:@dc1prd-scan:1521/prd3
+  username: polnote_service
+  password: pr0dn0tes
+  driverClass: oracle.jdbc.OracleDriver
+  poolName: TGDBSERVER3_DATASOURCE_POOL
+  maxActive: 25
+  initialSize: 3
+  testOnBorrow: true
+  validationQuery: SELECT 1 FROM DUAL
+propertiesDomainInjector:
+  env: PROD
+cxf:
+  path: /v2

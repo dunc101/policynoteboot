@@ -1,0 +1,25 @@
+server:
+  port: 8080
+management:
+  security:
+    enabled: false
+DB4:
+  url: jdbc:oracle:thin:@10.99.1.60:1521/ORICTST.WORLD
+  username: inquiry
+  password: inquiry1
+TGDBSERVER1DataSource:
+  url: jdbc:oracle:thin:@xtst-scan.ipacc.com:1521/tst1
+  username: polnote_service
+  password: p0ln0t3t3st
+TGDBSERVER2DataSource:
+  url: jdbc:oracle:thin:@xtst-scan.ipacc.com:1521/tst2
+  username: polnote_service
+  password: p0ln0t3t3st
+TGDBSERVER3DataSource:
+  url: jdbc:oracle:thin:@xtst-scan.ipacc.com:1521/tst3
+  username: polnote_service
+  password: p0ln0t3t3st
+propertiesDomainInjector:
+  env: TEST
+cxf:
+  path: /v2

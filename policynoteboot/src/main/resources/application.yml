@@ -1,0 +1,52 @@
+server:
+  port: 8080
+management:
+  security:
+    enabled: false
+  health:
+    db:
+      enabled: true
+DB4:
+  url: jdbc:oracle:thin:@xtst-scan.ipacc.com:1521/inqtst.ipacc.com
+  username: inquiry
+  password: inquiry1
+  driverClass: oracle.jdbc.OracleDriver
+  poolName: DB4_DATASOURCE_POOL
+  maxActive: 25
+  initialSize: 3
+  testOnBorrow: true
+  validationQuery: SELECT 1 FROM DUAL
+TGDBSERVER1DataSource:
+  url: jdbc:oracle:thin:@xtst-scan.ipacc.com:1521/tst1
+  username: polnote_service
+  password: p0ln0t3t3st
+  driverClass: oracle.jdbc.OracleDriver
+  poolName: TGDBSERVER1_DATASOURCE_POOL
+  maxActive: 25
+  initialSize: 3
+  testOnBorrow: true
+  validationQuery: SELECT 1 FROM DUAL
+TGDBSERVER2DataSource:
+  url: jdbc:oracle:thin:@xtst-scan.ipacc.com:1521/tst2
+  username: polnote_service
+  password: p0ln0t3t3st
+  driverClass: oracle.jdbc.OracleDriver
+  poolName: TGDBSERVER2_DATASOURCE_POOL
+  maxActive: 25
+  initialSize: 3
+  testOnBorrow: true
+  validationQuery: SELECT 1 FROM DUAL
+TGDBSERVER3DataSource:
+  url: jdbc:oracle:thin:@xtst-scan.ipacc.com:1521/tst3
+  username: polnote_service
+  password: p0ln0t3t3st
+  driverClass: oracle.jdbc.OracleDriver
+  poolName: TGDBSERVER3_DATASOURCE_POOL
+  maxActive: 25
+  initialSize: 3
+  testOnBorrow: true
+  validationQuery: SELECT 1 FROM DUAL
+propertiesDomainInjector:
+  env: TEST
+cxf:
+  path: /v2

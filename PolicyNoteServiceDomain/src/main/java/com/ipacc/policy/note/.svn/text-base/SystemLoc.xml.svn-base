@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SystemLoc">
+
+	<typeAlias alias="systemLoc" type="com.ipacc.common.domain.SystemLoc" />
+
+	<cacheModel id="systemLocCache" type="FIFO">
+		<flushInterval hours="24"/>
+		<property name="size" value="300"/>
+	</cacheModel>	
+	
+	<resultMap id="systemLocResult" class="systemLoc">
+		<result property="environment" 		column="ENVIRONMENT" />
+		<result property="product" 			column="PRODUCT" />
+		<result property="state" 			column="STATE" />
+		<result property="stateAbbr" 		column="STATEABBR" />
+		<result property="systemCategory" 	column="SYSTEMCATEGORY" />
+		<result property="serverName" 		column="SERVERNAME" />
+		<result property="ownerName" 		column="OWNERNAME" />
+		<result property="archiveOwnerName"	column="ARCHIVEOWNERNAME" />
+		<result property="odbcConnectStr" 	column="ODBCCONNECTSTR" />
+		<result property="serverType" 		column="SERVERTYPE" />
+		<result property="tableStructure" 	column="TABLESTRUCTURE" />
+		<result property="systemName" 		column="SYSTEMNAME" />
+	</resultMap>
+	
+	<select id="selectAllSystemLocs" resultMap="systemLocResult" parameterClass="systemLoc"
+			cacheModel="systemLocCache">
+		select * from COMMON.SYSTEMLOC
+		where STATE != 0
+		and TABLESTRUCTURE = 'Talon'
+	</select>
+
+	<select id="selectSystemLoc" resultMap="systemLocResult" parameterClass="systemLoc"
+			cacheModel="systemLocCache">
+		select * from COMMON.SYSTEMLOC 
+		where UPPER(ENVIRONMENT) = #environment# 
+		and STATE = #state#
+		and PRODUCT = #product#
+		and TABLESTRUCTURE = 'Talon'
+	</select>
+	
+</sqlMap>

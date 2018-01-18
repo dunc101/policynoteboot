@@ -1,0 +1,9 @@
+K 14
+bugtraq:number
+V 4
+true
+K 11
+bugtraq:url
+V 36
+http://localhost:8080/browse/%BUGID%
+END

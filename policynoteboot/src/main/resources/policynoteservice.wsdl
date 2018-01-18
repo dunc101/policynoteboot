@@ -1,0 +1,419 @@
+<!-- Created by TIBCO WSDL -->
+<wsdl:definitions
+	xmlns:tns="http://services.ipacc.com/policy/PolicyNoteService/v2"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	name="PolicyNoteService" targetNamespace="http://services.ipacc.com/policy/PolicyNoteService/v2">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://services.ipacc.com/policy/PolicyNoteService/v2"
+			elementFormDefault="qualified" attributeFormDefault="unqualified">
+			<xs:complexType name="FindSystemLocRequestType">
+				<xs:sequence>
+					<xs:element name="StateCode" form="unqualified" type="xs:int" />
+					<xs:element name="ProductCode" form="unqualified" type="xs:int" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetNotesRequestType">
+				<xs:sequence>
+					<xs:element name="PolicyNumber" form="unqualified" type="xs:string" />
+					<xs:element name="VersionNumber" form="unqualified"
+						type="xs:int" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PolicyNoteExtType">
+				<xs:complexContent>
+					<xs:extension base="tns:PolicyNoteType">
+						<xs:sequence>
+							<xs:element name="CompanyID" form="unqualified" type="xs:string"
+								minOccurs="0" />
+							<xs:element name="RequestName" form="unqualified"
+								type="xs:string" minOccurs="0" />
+							<xs:element name="Processor" form="unqualified" type="xs:string"
+								minOccurs="0" />
+							<xs:element name="PolicyState" form="unqualified"
+								type="xs:string" minOccurs="0" />
+							<xs:element name="NoteTypeCode" form="unqualified"
+								type="xs:string" minOccurs="0" />
+							<xs:element name="OriginInd" form="unqualified" type="xs:string"
+								minOccurs="0" />
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="PolicyNoteType">
+				<xs:sequence>
+					<xs:element name="PolicyNoteSegmentInfo" form="unqualified"
+						type="tns:SegmentInfoType" minOccurs="0" />
+					<xs:element name="NoteNumber" form="unqualified" type="xs:int"
+						minOccurs="0" />
+					<xs:element name="CreatedDate" form="unqualified" type="xs:dateTime"
+						minOccurs="0" />
+					<xs:element name="CreatedBy" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="SourceCode" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="SystemSource" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="RedFlag" form="unqualified" type="xs:boolean"
+						minOccurs="0" />
+					<xs:element name="NoteText" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="ChangeType" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="ChangeEffectiveDateTime" form="unqualified"
+						type="xs:dateTime" minOccurs="0" />
+					<xs:element name="ActivityID" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="HandledBy" form="unqualified" type="xs:date"
+						minOccurs="0" />
+					<xs:element name="AuthorID" form="unqualified" type="xs:string"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="SaveNotesRequestType">
+				<xs:sequence>
+					<xs:element name="PolicyNumber" form="unqualified" type="xs:string" />
+					<xs:element name="VersionNumber" form="unqualified"
+						type="xs:int" />
+					<xs:element name="Notes" form="unqualified" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence minOccurs="0" maxOccurs="unbounded">
+								<xs:element name="Note" form="unqualified" type="tns:PolicyNoteExtType"
+									minOccurs="0" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="SegmentInfoType">
+				<xs:sequence>
+					<xs:element name="ChangeNumber" form="unqualified" type="xs:int"
+						minOccurs="0" />
+					<xs:element name="SegmentEffectiveDate" form="unqualified"
+						type="xs:date" minOccurs="0" />
+					<xs:element name="SegmentExpirationDate" form="unqualified"
+						type="xs:date" minOccurs="0" />
+					<xs:element name="SegmentStatus" form="unqualified"
+						type="xs:string" minOccurs="0" />
+					<xs:element name="CancelDate" form="unqualified" type="xs:date"
+						minOccurs="0" />
+					<xs:element name="InactivatedBy" form="unqualified"
+						type="xs:string" minOccurs="0" />
+					<xs:element name="MarkedForDelete" form="unqualified"
+						type="xs:string" minOccurs="0" />
+					<xs:element name="IsModified" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="IsNew" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="IsValid" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="ApplyFlag" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="RangeValue" form="unqualified" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="UserId" form="unqualified" type="xs:string"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TGPolicyNoteType">
+				<xs:complexContent>
+					<xs:extension base="tns:PolicyNoteType">
+						<xs:sequence>
+							<xs:element name="PolicyNumber" form="unqualified"
+								type="xs:string" />
+							<xs:element name="VersionNumber" form="unqualified"
+								type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="UpdateNoteRequestType">
+				<xs:sequence>
+					<xs:element name="PolicyNumber" form="unqualified" type="xs:string" />
+					<xs:element name="VersionNumber" form="unqualified"
+						type="xs:int" />
+					<xs:element name="Note" form="unqualified" type="tns:PolicyNoteExtType" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="FindSystemLocFaultResponse" type="tns:IPACCFaultType" />
+			<xs:element name="FindSystemLocRequest" type="tns:FindSystemLocRequestType" />
+			<xs:element name="FindSystemLocResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="out" form="unqualified" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetNotesFaultResponse" type="tns:IPACCFaultType" />
+			<xs:element name="GetNotesRequest" type="tns:GetNotesRequestType" />
+			<xs:element name="GetNotesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Notes" form="unqualified" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence minOccurs="0" maxOccurs="unbounded">
+									<xs:element name="Note" form="unqualified" type="tns:TGPolicyNoteType"
+										minOccurs="0" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PingRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="in" form="unqualified" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PingResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="out" form="unqualified" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SaveNotesFaultResponse" type="tns:IPACCFaultType" />
+			<xs:element name="SaveNotesRequest" type="tns:SaveNotesRequestType" />
+			<xs:element name="SaveNotesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="out" form="unqualified" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ServiceInfo" type="tns:ServiceInfoType" />
+			<xs:element name="UpdateNoteFaultResponse" type="tns:IPACCFaultType" />
+			<xs:element name="UpdateNoteRequest" type="tns:UpdateNoteRequestType" />
+			<xs:element name="UpdateNoteResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="out" form="unqualified" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="GeneralErrorType">
+				<xs:sequence>
+					<xs:element name="ErrorSource" type="xs:string" />
+					<xs:element name="ErrorNumber" type="xs:int" />
+					<xs:element name="ErrorCode" type="xs:string" />
+					<xs:element name="ErrorMessage" type="xs:string" />
+					<xs:element name="ErrorType" type="xs:string" />
+					<xs:element name="StackTrace" type="xs:string"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GeneralWarningType">
+				<xs:sequence>
+					<xs:element name="WarningSource" type="xs:string" />
+					<xs:element name="WarningCode" type="xs:string" />
+					<xs:element name="WarningMessage" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="IPACCFaultType">
+				<xs:sequence>
+					<xs:element name="Message" type="xs:string" minOccurs="0" />
+					<xs:element name="IPACCErrors" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="IPACCError" type="tns:GeneralErrorType"
+									minOccurs="0" maxOccurs="unbounded" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="IPACCWarningType">
+				<xs:sequence>
+					<xs:element name="Message" type="xs:string" minOccurs="0" />
+					<xs:element name="IPACCWarnings" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="IPACCWarning" type="tns:GeneralWarningType"
+									minOccurs="0" maxOccurs="unbounded" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ServiceInfoType">
+				<xs:sequence>
+					<xs:element name="TransID" type="xs:string" minOccurs="0" />
+					<xs:element name="ClientID" type="xs:string" minOccurs="0" />
+					<xs:element name="ServiceVersion" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="Params" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Param" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:simpleContent>
+											<xs:extension base="xs:string">
+												<xs:attribute name="name" use="required" type="xs:string" />
+											</xs:extension>
+										</xs:simpleContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="SaveNotesRequest">
+		<wsdl:part name="serviceInfo" element="tns:ServiceInfo" />
+		<wsdl:part name="notesParms" element="tns:SaveNotesRequest" />
+	</wsdl:message>
+	<wsdl:message name="SaveNotesResponse">
+		<wsdl:part name="notesParms" element="tns:SaveNotesResponse" />
+	</wsdl:message>
+	<wsdl:message name="SaveNotesFaultResponseMsg">
+		<wsdl:part name="notesUploadFault" element="tns:SaveNotesFaultResponse" />
+	</wsdl:message>
+	<wsdl:message name="UpdateNoteRequest">
+		<wsdl:part name="serviceInfo" element="tns:ServiceInfo" />
+		<wsdl:part name="updatNoteParams" element="tns:UpdateNoteRequest" />
+	</wsdl:message>
+	<wsdl:message name="UpdateNoteResponse">
+		<wsdl:part name="updateNoteParams" element="tns:UpdateNoteResponse" />
+	</wsdl:message>
+	<wsdl:message name="UpdateNote_faultMsg">
+		<wsdl:part name="updateNoteFault" element="tns:UpdateNoteFaultResponse" />
+	</wsdl:message>
+	<wsdl:message name="FindSystemLocRequest">
+		<wsdl:part name="serviceInfo" element="tns:ServiceInfo" />
+		<wsdl:part name="sysLocParms" element="tns:FindSystemLocRequest" />
+	</wsdl:message>
+	<wsdl:message name="FindSystemLocResponse">
+		<wsdl:part name="sysLocParms" element="tns:FindSystemLocResponse" />
+	</wsdl:message>
+	<wsdl:message name="FindSystemLocFaultResponseMsg">
+		<wsdl:part name="FindSystemLocFault" element="tns:FindSystemLocFaultResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetNotesRequest">
+		<wsdl:part name="serviceInfo" element="tns:ServiceInfo" />
+		<wsdl:part name="getNotesParams" element="tns:GetNotesRequest" />
+	</wsdl:message>
+	<wsdl:message name="GetNotesResponse">
+		<wsdl:part name="getNotesParams" element="tns:GetNotesResponse" />
+	</wsdl:message>
+	<wsdl:message name="GetNotesFaultResponseMsg">
+		<wsdl:part name="getNotesFault" element="tns:GetNotesFaultResponse" />
+	</wsdl:message>
+	<wsdl:message name="PingRequest">
+		<wsdl:part name="status" element="tns:PingRequest" />
+		<wsdl:part name="serviceInfo" element="tns:ServiceInfo" />
+	</wsdl:message>
+	<wsdl:message name="PingResponse">
+		<wsdl:part name="status" element="tns:PingResponse" />
+	</wsdl:message>
+	<wsdl:portType name="PolicyNoteService">
+		<wsdl:operation name="saveNotes">
+			<wsdl:input message="tns:SaveNotesRequest" />
+			<wsdl:output message="tns:SaveNotesResponse" />
+			<wsdl:fault name="fault" message="tns:SaveNotesFaultResponseMsg" />
+		</wsdl:operation>
+		<wsdl:operation name="updateNote">
+			<wsdl:input message="tns:UpdateNoteRequest" />
+			<wsdl:output message="tns:UpdateNoteResponse" />
+			<wsdl:fault name="fault" message="tns:UpdateNote_faultMsg" />
+		</wsdl:operation>
+		<wsdl:operation name="findSystemLoc">
+			<wsdl:input message="tns:FindSystemLocRequest" />
+			<wsdl:output message="tns:FindSystemLocResponse" />
+			<wsdl:fault name="fault" message="tns:FindSystemLocFaultResponseMsg" />
+		</wsdl:operation>
+		<wsdl:operation name="getNotes">
+			<wsdl:input message="tns:GetNotesRequest" />
+			<wsdl:output message="tns:GetNotesResponse" />
+			<wsdl:fault name="fault" message="tns:GetNotesFaultResponseMsg" />
+		</wsdl:operation>
+		<wsdl:operation name="ping">
+			<wsdl:input message="tns:PingRequest" />
+			<wsdl:output message="tns:PingResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="PolicyNoteSOAPBing1" type="tns:PolicyNoteService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="saveNotes">
+			<wsdl:documentation />
+			<soap:operation style="document" soapAction="saveNotes" />
+			<wsdl:input>
+				<soap:body use="literal" parts="notesParms" />
+				<soap:header use="literal" message="tns:SaveNotesRequest"
+					part="serviceInfo" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" parts="notesParms" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault use="literal" name="fault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="updateNote">
+			<wsdl:documentation />
+			<soap:operation style="document" soapAction="updateNote" />
+			<wsdl:input>
+				<soap:body use="literal" parts="updatNoteParams" />
+				<soap:header use="literal" message="tns:UpdateNoteRequest"
+					part="serviceInfo" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" parts="updateNoteParams" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault use="literal" name="fault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="findSystemLoc">
+			<wsdl:documentation />
+			<soap:operation style="document" soapAction="findSystemLoc" />
+			<wsdl:input>
+				<soap:body use="literal" parts="sysLocParms" />
+				<soap:header use="literal" message="tns:FindSystemLocRequest"
+					part="serviceInfo" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" parts="sysLocParms" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault use="literal" name="fault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getNotes">
+			<wsdl:documentation />
+			<soap:operation style="document" soapAction="getNotes" />
+			<wsdl:input>
+				<soap:body use="literal" parts="getNotesParams" />
+				<soap:header use="literal" message="tns:GetNotesRequest"
+					part="serviceInfo" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" parts="getNotesParams" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault use="literal" name="fault" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ping">
+			<wsdl:documentation />
+			<soap:operation style="document" soapAction="ping" />
+			<wsdl:input>
+				<soap:body use="literal" parts="status" />
+				<soap:header use="literal" message="tns:PingRequest"
+					part="serviceInfo" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" parts="status" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="PolicyNoteService">
+		<wsdl:port name="PolicyNoteSOAPBing1" binding="tns:PolicyNoteSOAPBing1">
+			<soap:address location="http://0.0.0.0:13131/policynoteservice/v2" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

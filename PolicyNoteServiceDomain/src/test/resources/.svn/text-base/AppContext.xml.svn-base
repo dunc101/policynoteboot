@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <!-- Property Value placeholders --> 
+<!--     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="PolicyNoteService.properties" />
+	</bean> -->
+	
+	<bean id="externalBeanRegistrar" class="com.ipacc.policy.note.util.ExternalBeanRegistrar"/>    
+    
+    <!-- Properties bean -->	
+    <bean id="appProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="singleton" value="true"/>
+        <property name="properties">
+                <props>
+                        <prop key="env">${env}</prop>
+                        <prop key="logComp">PolicyNoteDomain</prop>
+                </props>
+        </property>
+	</bean>	
+
+	<!-- Logger bean --> 
+	<!-- Logger bean --> 
+<!-- 	<bean id="logger" class="com.ipacc.policy.note.util.LogFactory" 
+			factory-method="getLogger">
+	</bean> -->
+	
+
+	<!-- Import beans -->
+	<import resource="iBatisRepositoryContext.xml"/>
+	
+	<!-- Service Object Definitions -->
+
+	<!-- SystemLocFinder -->
+	<bean id="SystemLocFindSrv" class="com.ipacc.common.service.impl.SystemLocFindServiceImpl">
+		<property name="systemLocDao" ref="SystemLocDAO"/>
+	</bean>
+
+	<!-- NotesUploader -->
+	<bean id="notesUploadDB1" class="com.ipacc.policy.note.service.impl.NotesServiceImpl">
+		<property name="noteDao" ref="noteDaoDB1"/>
+	</bean>
+	
+	<bean id="notesUploadDB2" class="com.ipacc.policy.note.service.impl.NotesServiceImpl">
+		<property name="noteDao" ref="noteDaoDB2"/>
+	</bean>
+	
+	<bean id="notesUploadDB3" class="com.ipacc.policy.note.service.impl.NotesServiceImpl">
+		<property name="noteDao" ref="noteDaoDB3"/>
+	</bean>
+	<!-- clearpath / MF notes -->
+	<bean id="notesUploadDB4" class="com.ipacc.policy.note.service.impl.NotesServiceImpl">
+		<property name="noteDao" ref="noteDaoDB4"/>
+	</bean>	
+</beans>
