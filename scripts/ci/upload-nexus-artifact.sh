@@ -19,7 +19,7 @@ cd $MAIN_DIRECTORY
 NEW_DIR=`pwd`
 echo "Curernt new dir is ${NEW_DIR}"
 # Move the jar to a generic name so we can easily upload it
-mv artifact/*.jar app.jar
+mv artifact/*.jar artifact/app.jar
 
 echo "ARTIFACT_ID is ${ARTIFACT_ID}"
 echo "About to upload artifact to Nexus ${ARTIFACT_ID}:${GROUP_ID}:${VERSION}"
