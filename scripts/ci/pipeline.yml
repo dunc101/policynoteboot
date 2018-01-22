@@ -48,35 +48,6 @@ resources:
     artifact: com.ipacc.services:policynoteboot:jar
     username: ((nexus-username))
     password: ((nexus-password))
-# SVN Resource of my main project that I want to deploy
-#- name: resource-main-code
-#  type: pull-request
-#  source:
-#    repository: svn://cvs01.ipacc.com/SOARepository/SOAPolicy/PolicyNoteService/trunk-jboss
-#    username: ((svn-username))
-#    password: ((svn-password))
-# SVN Location of my integration tests for dev
-#- name: resource-dev-integration-code
-#  type: pull-request
-#  source:
-#    repository: svn://cvs01.ipacc.com/SOARepository/SOAPolicy/PolicyNoteService/trunk-jboss
-#    username: ((svn-username))
-#    password: ((svn-password))
-# SVN Location of my integration tests for test
-#- name: resource-test-integration-code
-#  type: pull-request
-#  source:
-#    repository: svn://cvs01.ipacc.com/SOARepository/SOAPolicy/PolicyNoteService/trunk-jboss
-#    username: ((svn-username))
-#    password: ((svn-password))
-# Resource to automatically update our version
-#- name: version
-#  type: semver
-#  source:
-#    driver: git
-#    uri: git@github.com:concourse/concourse.git
-#    branch: version
-#    file: version
     
 # PCF Deployment to Dev Space Resource
 - name: resource-deploy-dev
@@ -176,7 +147,10 @@ jobs:
     passed: [test-integration-tests]
   - get: version
     params: {bump: minor}
-  - put: version
-    params: {file: version/number}
+  - get: resource-main-code
+  - get: artifact
+  - task: create-release-artifact
+    file: create-release-artifact.yml
+
 #  - task:
 #    file: resource-main-code/scripts/ci/bump-pom-version.yml
