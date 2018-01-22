@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-cat -lart resource-main-code/version
+cat resource-main-code/version
 # Update the poms version to the file that is created from the semver resource
 VERSION=`cat resource-main-code/version`
 
@@ -14,13 +14,11 @@ mvn install -DskipTests=true
 
 # Now, build the deployable artifact projects
 cd ../policynoteboot
-ls -lart resource-main-code/
-ls -lart resource-main-code/version
-echo "Setting the new version to ${VERSION}"
-mvn versions:set -DnewVersion=${VERSION}
+#echo "Setting the new version to ${VERSION}"
+#mvn versions:set -DnewVersion=${VERSION}
 # Below is needed if you are updating a parent pom
 # mvn versions:update-child-modules
-mvn versions:set -DnewVersion=${VERSION} clean package test install pmd:pmd sonar:sonar -Dsonar.host.url=http://sonar01.ipacc.com:9000/ -Dsonar.scm.disabled=True
+mvn versions:set -DnewVersion=${VERSION}-SNAPSHOT clean package test install pmd:pmd sonar:sonar -Dsonar.host.url=http://sonar01.ipacc.com:9000/ -Dsonar.scm.disabled=True
 
 # Copy the jar file to our out directory so that we can upload it to Nexus
 cd target
