@@ -23,6 +23,7 @@ mvn versions:set -DnewVersion=${VERSION}-SNAPSHOT
 mvn clean package test install pmd:pmd sonar:sonar -Dsonar.host.url=http://sonar01.ipacc.com:9000/ -Dsonar.scm.disabled=True
 
 # Copy the jar file to our out directory so that we can upload it to Nexus
+cp pom.xml ../../out
 cd target
 mv *.jar app.jar
 echo "Copying the jar file to the output directory."
