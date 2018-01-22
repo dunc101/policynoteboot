@@ -2,12 +2,15 @@
 POM_DIRECTORY=$1
 VERSION=$2
 
+# Record my current directory
+pushd `pwd`
 cd $POM_DIRECTORY
 echo "Getting the ARTIFACT_ID"
 ARTIFACT_ID=`mvn -q -Dexec.executable="echo" -Dexec.args='${project.artifactId}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec 2>/dev/null`
 echo "Getting the GROUP_ID"
 GROUP_ID=`mvn -q -Dexec.executable="echo" -Dexec.args='${project.groupId}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec 2>/dev/null`
-cd
+# Go back to the start directory.... 
+popd
 # Move the jar to a generic name so we can easily upload it
 mv artifact/*.jar app.jar
 
