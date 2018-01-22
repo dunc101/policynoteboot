@@ -14,5 +14,5 @@ run:
   - -exc
   - |
     chmod +x resource-main-code/scripts/ci/upload-nexus-artifact.sh
-    sh resource-main-code/scripts/ci/upload-nexus-artifact.sh resource-main-code/policynoteboot `cat version/version`
+    sh resource-main-code/scripts/ci/upload-nexus-artifact.sh resource-main-code/policynoteboot `cat version/version` jar
     

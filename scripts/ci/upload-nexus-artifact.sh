@@ -1,6 +1,7 @@
 #!/bin/bash
 POM_DIRECTORY=$1
 VERSION=$2
+PACKAGE_TYPE=$3
 
 # Let's copy the settings.xml file to the correct location so that we have acces to the Infinity jar files
 mkdir ${HOME}/.m2
@@ -28,8 +29,8 @@ curl -v \
 -F "g=${GROUP_ID}" \
 -F "a=${ARTIFACT_ID}" \
 -F "v=${VERSION}" \
--F "p=jar" \
--F "e=jar" \
+-F "p=${PACKAGE_TYPE}" \
+-F "e=${PACKAGE_TYPE}" \
 -F hasPom=false \
 -F "file=@./artifact/app.jar" \
 http://maven01.ipacc.com:8081/nexus/service/local/artifact/maven/content
