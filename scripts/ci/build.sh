@@ -1,9 +1,8 @@
 #!/bin/bash 
 
 ls -lart 
-cat resource-main-code/version
 # Update the poms version to the file that is created from the semver resource
-VERSION=`cat resource-main-code/version`
+VERSION=`cat version/version`
 
 # Let's copy the settings.xml file to the correct location so that we have acces to the Infinity jar files
 mkdir ${HOME}/.m2
