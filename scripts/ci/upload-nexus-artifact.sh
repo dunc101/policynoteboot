@@ -2,6 +2,10 @@
 POM_DIRECTORY=$1
 VERSION=$2
 
+# Let's copy the settings.xml file to the correct location so that we have acces to the Infinity jar files
+mkdir ${HOME}/.m2
+cp resource-main-code/settings.xml ${HOME}/.m2/
+
 # Record my current directory
 pushd `pwd`
 cd $POM_DIRECTORY
