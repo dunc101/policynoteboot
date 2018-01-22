@@ -13,5 +13,5 @@ run:
   - -exc
   - |
     chmod +x resource-main-code/scripts/ci/upload-nexus-artifact.sh
-    sh resource-main-code/scripts/ci/upload-nexus-artifact.sh `cat version/version` "" "http://maven01.ipacc.com:8081/nexus/content/repositories/infinity-releases"
+    sh resource-main-code/scripts/ci/upload-nexus-artifact.sh resource-main-code/policynoteboot `cat version/version` "http://maven01.ipacc.com:8081/nexus/content/repositories/infinity-releases"
     
