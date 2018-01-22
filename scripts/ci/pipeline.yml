@@ -102,20 +102,19 @@ jobs:
 - name: build-and-unit-test
   serial: true
   plan: 
-  - get: resource-main-code
-    trigger: true
   - get: version
     params: {bump: patch}
-  - put: version
-    params: {file: version/number}
+  - get: resource-main-code
+    trigger: true
   - task: build
     # produces a folder named /out with the manifest.yml and app.jar in it that was built
     file: resource-main-code/scripts/ci/build-and-unit-test.yml
-  # Upload the produced to Nexus.
+  # Upload the produced artifact to Nexus as a SNAPSHOT (SNAPSHOT created via the build.sh file).
   - put: artifact
     params:
+      # app.jar and pom.xml is created in the build.sh script which is invoked via the build-and-unit-test.yml
       file: out/app.jar
-      pom_file: resource-main-code/policynoteboot/pom.xml
+      pom_file: out/pom.xml
 
 # Deploy to PCF Dev space
 - name: deploy-dev-space
@@ -179,5 +178,5 @@ jobs:
     params: {bump: minor}
   - put: version
     params: {file: version/number}
-  - task:
-    file: resource-main-code/scripts/ci/bump-pom-version.yml
+#  - task:
+#    file: resource-main-code/scripts/ci/bump-pom-version.yml
