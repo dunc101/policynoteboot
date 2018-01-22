@@ -7,14 +7,14 @@ mkdir ${HOME}/.m2
 cp resource-main-code/settings.xml ${HOME}/.m2/
 
 # Record my current directory
-pushd `pwd`
+MAIN_DIRECTORY=`pwd`
 cd $POM_DIRECTORY
 echo "Getting the ARTIFACT_ID"
 ARTIFACT_ID=`mvn -q -Dexec.executable="echo" -Dexec.args='${project.artifactId}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec 2>/dev/null`
 echo "Getting the GROUP_ID"
 GROUP_ID=`mvn -q -Dexec.executable="echo" -Dexec.args='${project.groupId}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec 2>/dev/null`
 # Go back to the start directory.... 
-popd
+cd $MAIN_DIRECTORY
 # Move the jar to a generic name so we can easily upload it
 mv artifact/*.jar app.jar
 
