@@ -16,7 +16,7 @@ resources:
 - name: resource-main-code
   type: git
   source:
-    ignore_paths: version
+    ignore_paths: [version]
     uri: https://github.com/dunc101/policynoteboot.git
 
 - name: resource-dev-integration-code
@@ -104,6 +104,10 @@ jobs:
   plan: 
   - get: resource-main-code
     trigger: true
+  - get: version
+    params: {bump: patch}
+  - put: version
+    params: {file: version/number}
   - task: build
     # produces a folder named /out with the manifest.yml and app.jar in it that was built
     file: resource-main-code/scripts/ci/build-and-unit-test.yml
@@ -135,14 +139,10 @@ jobs:
   - get: resource-deploy-dev
     trigger: true
     passed: [deploy-dev-space]
-  - get: version
-    params: {pre: rc}
   - task: perform-integration-tests
     file: resource-main-code/scripts/ci/dev-integration-tests.yml
-  - put: version
-    params: {file: version/number}
-#  - put: resource-main-code
-#    params: {repository: out/number}
+#  - put: version
+#    params: {file: version/number}
 
 # Deploy to the PCF test space
 - name: deploy-test-space
@@ -168,3 +168,16 @@ jobs:
     passed: [deploy-test-space]
   - task: perform-integration-tests
     file: resource-main-code/scripts/ci/test-integration-tests.yml
+    
+- name: bump-minor-version
+  serial: true
+  plan:
+  - get: resource-deploy-test
+    trigger: true
+    passed: [test-integration-tests]
+  - get: version
+    params: {bump: minor}
+  - put: version
+    params: {file: version/number}
+  - task:
+    file: resource-main-code/scripts/ci/bump-pom-version.yml
