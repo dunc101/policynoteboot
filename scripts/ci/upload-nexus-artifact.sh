@@ -15,6 +15,8 @@ echo "Getting the GROUP_ID"
 GROUP_ID=`mvn -q -Dexec.executable="echo" -Dexec.args='${project.groupId}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec 2>/dev/null`
 # Go back to the start directory.... 
 cd $MAIN_DIRECTORY
+NEW_DIR=`pwd`
+echo "Curernt new dir is ${NEW_DIR}"
 # Move the jar to a generic name so we can easily upload it
 mv artifact/*.jar app.jar
 
