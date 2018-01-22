@@ -1,6 +1,7 @@
 #!/bin/bash 
 
 ls -lart 
+cat version/version
 # Update the poms version to the file that is created from the semver resource
 VERSION=`cat version/version`
 
