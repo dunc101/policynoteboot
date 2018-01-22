@@ -1,9 +1,11 @@
+# Needed to checkout SVN Code Only
 resource_types:
-- name: pull-request
-  type: docker-image
-  source:
-    repository: robophred/concourse-svn-resource
-    tag: alpha
+#- name: pull-request
+#  type: docker-image
+#  source:
+#    repository: robophred/concourse-svn-resource
+#    tag: alpha
+
 - name: maven-resource
   type: docker-image
   source:
@@ -11,6 +13,32 @@ resource_types:
     tag: latest
 
 resources:
+- name: resource-main-code
+  type: git
+  source:
+    ignore_paths: version
+    uri: https://github.com/dunc101/policynoteboot.git
+
+- name: resource-dev-integration-code
+  type: git
+  source:
+    uri: https://github.com/dunc101/policynoteboot.git
+    
+- name: resource-test-integration-code
+  type: git
+  source:
+    uri: https://github.com/dunc101/policynoteboot.git
+    
+- name: version
+  type: semver
+  source:
+    driver: git
+    uri: https://github.com/dunc101/policynoteboot.git
+    branch: master
+    file: version
+    username: ((github-username))
+    password: ((github-password))
+    
 # nexus repo
 - name: artifact
   type: maven-resource
@@ -21,26 +49,34 @@ resources:
     username: ((nexus-username))
     password: ((nexus-password))
 # SVN Resource of my main project that I want to deploy
-- name: resource-main-code
-  type: pull-request
-  source:
-    repository: svn://cvs01.ipacc.com/SOARepository/SOAPolicy/PolicyNoteService/trunk-jboss
-    username: ((svn-username))
-    password: ((svn-password))
+#- name: resource-main-code
+#  type: pull-request
+#  source:
+#    repository: svn://cvs01.ipacc.com/SOARepository/SOAPolicy/PolicyNoteService/trunk-jboss
+#    username: ((svn-username))
+#    password: ((svn-password))
 # SVN Location of my integration tests for dev
-- name: resource-dev-integration-code
-  type: pull-request
-  source:
-    repository: svn://cvs01.ipacc.com/SOARepository/SOAPolicy/PolicyNoteService/trunk-jboss
-    username: ((svn-username))
-    password: ((svn-password))
+#- name: resource-dev-integration-code
+#  type: pull-request
+#  source:
+#    repository: svn://cvs01.ipacc.com/SOARepository/SOAPolicy/PolicyNoteService/trunk-jboss
+#    username: ((svn-username))
+#    password: ((svn-password))
 # SVN Location of my integration tests for test
-- name: resource-test-integration-code
-  type: pull-request
-  source:
-    repository: svn://cvs01.ipacc.com/SOARepository/SOAPolicy/PolicyNoteService/trunk-jboss
-    username: ((svn-username))
-    password: ((svn-password))
+#- name: resource-test-integration-code
+#  type: pull-request
+#  source:
+#    repository: svn://cvs01.ipacc.com/SOARepository/SOAPolicy/PolicyNoteService/trunk-jboss
+#    username: ((svn-username))
+#    password: ((svn-password))
+# Resource to automatically update our version
+#- name: version
+#  type: semver
+#  source:
+#    driver: git
+#    uri: git@github.com:concourse/concourse.git
+#    branch: version
+#    file: version
     
 # PCF Deployment to Dev Space Resource
 - name: resource-deploy-dev
@@ -99,8 +135,14 @@ jobs:
   - get: resource-deploy-dev
     trigger: true
     passed: [deploy-dev-space]
+  - get: version
+    params: {pre: rc}
   - task: perform-integration-tests
     file: resource-main-code/scripts/ci/dev-integration-tests.yml
+  - put: version
+    params: {file: version/number}
+#  - put: resource-main-code
+#    params: {repository: out/number}
 
 # Deploy to the PCF test space
 - name: deploy-test-space
@@ -121,7 +163,7 @@ jobs:
   plan:
   - get: resource-main-code
   - get: resource-test-integration-code
-  - get:  resource-deploy-test
+  - get: resource-deploy-test
     trigger: true
     passed: [deploy-test-space]
   - task: perform-integration-tests
