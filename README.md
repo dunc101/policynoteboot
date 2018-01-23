@@ -32,5 +32,22 @@ The git pipeline uses the **pipeline.yml** file located in the scripts/ci folder
 The svn pipeline uses the **pipeline-svn.yml** file located in the scripts/ci folder and performs everything that the Git pipeline performs
 except that it does NOT bump the version of your application due to the semver resource not supporting SVN.
 
-
+# How to use this pipeline
+1. git clone <this url>
+2. Run fly command to add the pipeline
+   ```
+   fly -t <yourtarget> set-pipeline -c scripts/ci/pipeline.yml -p <yourproject> --load-from-vars credentials.yml
+   ```
+   Modify the credentials.yml file to include your own credentials.  This file will automatically be merged into your pipeline whenever    you run the above command.
+   
+   Useful commands to help with debugging that I have found:
+   1. How to debug / intercept/ hijack a concourse docker image
+   ```
+   fly -t <yourtarget> builds
+   ```
+   The above will list all of the builds.
+   ```
+   fly -t <yourtarget> intercept -b <buildnumber>
+   ```
+   The buildnumber is the build you want to intercept from the fly -t <yourtarget> builds command mentioned above.
 
