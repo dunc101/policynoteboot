@@ -139,14 +139,14 @@ svn://cvs01/SOARepository/SOAPolicy/PolicyNoteService/trunk-jboss/scripts/ci/pip
 
 build.sh
 file
+21842
 
 
 
-
-2018-01-17T21:14:58.400679Z
-c970ec5c27d0aa210b2fcbb6acbecd4d
-2018-01-17T18:59:46.085533Z
-21808
+2018-01-22T17:49:29.958063Z
+f75700c8899f295e3c6fd108ae3e9624
+2018-01-22T17:50:22.105444Z
+21842
 dduncan
 
 
@@ -169,7 +169,7 @@ dduncan
 
 
 
-1491
+1152
 
 build-and-unit-test.yml
 file
@@ -204,6 +204,40 @@ dduncan
 
 
 295
+
+pipeline-svn.yml
+file
+21838
+
+
+
+2018-01-18T21:47:40.776494Z
+8ef6f5ae3527a3244fd830751581e433
+2018-01-22T15:42:14.781782Z
+21838
+dduncan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3822
 
 fly.exe
 file

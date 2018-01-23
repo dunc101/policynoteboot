@@ -15,8 +15,6 @@ mvn install -DskipTests=true
 
 # Now, build the deployable artifact projects
 cd ../policynoteboot
-echo "Echoign the version"
-echo "Version is ${VERSION}"
 #echo "Setting the new version to ${VERSION}"
 mvn versions:set -DnewVersion=${VERSION}-SNAPSHOT
 # Below is needed if you are updating a parent pom
