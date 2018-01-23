@@ -39,7 +39,7 @@ resources:
     username: ((github-username))
     password: ((github-password))
     
-# nexus repo
+# nexus repo for SNAPSHOTS. 
 - name: artifact
   type: maven-resource
   source:
@@ -80,6 +80,9 @@ jobs:
   - task: build
     # produces a folder named /out with the manifest.yml and app.jar in it that was built
     file: resource-main-code/scripts/ci/build-and-unit-test.yml
+  # Add the patch version to git
+  - put: version
+    params: {file: version/number}
   # Upload the produced artifact to Nexus as a SNAPSHOT (SNAPSHOT created via the build.sh file).
   - put: artifact
     params:
@@ -150,7 +153,7 @@ jobs:
   - get: resource-main-code
   - get: artifact
   - task: create-release-artifact
-    file: create-release-artifact.yml
-
-#  - task:
-#    file: resource-main-code/scripts/ci/bump-pom-version.yml
+    file: resource-main-code/scripts/ci/create-nexus-artifact.yml
+    # Upload the minor release version again so we know where we left off last time
+  - put: version
+    params: {file: version/number}
