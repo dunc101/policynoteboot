@@ -36,7 +36,7 @@ except that it does NOT bump the version of your application due to the semver r
 1. git clone <this url>
 2. Run fly command to add the pipeline
    ```
-   fly -t <yourtarget> set-pipeline -c scripts/ci/pipeline.yml -p <yourproject> --load-from-vars credentials.yml
+   fly -t <yourtarget> set-pipeline -c scripts/ci/pipeline.yml -p <yourproject> --load-vars-from credentials.yml
    ```
    Modify the credentials.yml file to include your own credentials.  This file will automatically be merged into your pipeline whenever    you run the above command.
    
