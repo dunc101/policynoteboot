@@ -7,7 +7,7 @@ You can find the pipeline scripts in the scripts/ci/ directory with **pipeline.y
    Note, if you need to use another language, all you would need to do is find a docker image that supports what you are trying to do and modify the appropriate build scripts.
 
 # Git Pipeline
-![alt text](https://github.com/dunc101/policynoteboot/blob/master/scripts/ci/git.pipeline.PNG)
+![Git Pipeline```](https://github.com/dunc101/policynoteboot/blob/master/scripts/ci/git.pipeline.PNG)
 The git pipeline uses the **pipeline.yml** file located in the scripts/ci folder and performs the following:
 1. Checks out your code from a git repository of your choice and builds the artifact, runs unit tests, and runs the code against sonarqube.
    The checkout is specified via the **resource-main-code** resource.  You will need to modify the **scripts/ci/build.sh** script which is the bash script
@@ -28,7 +28,7 @@ The git pipeline uses the **pipeline.yml** file located in the scripts/ci folder
   repository with the new bumped version that is created in this resource.
   
 # SVN Pipeline
-![alt text](https://github.com/dunc101/policynoteboot/blob/master/scripts/ci/svn.pipeline.PNG)
+![SVN Pipeline](https://github.com/dunc101/policynoteboot/blob/master/scripts/ci/svn.pipeline.PNG)
 The svn pipeline uses the **pipeline-svn.yml** file located in the scripts/ci folder and performs everything that the Git pipeline performs
 except that it does NOT bump the version of your application due to the semver resource not supporting SVN.
 
