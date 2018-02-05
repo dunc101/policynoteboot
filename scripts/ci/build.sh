@@ -1,13 +1,11 @@
 #!/bin/bash 
 
-ls -lart 
-cat version/version
 # Update the poms version to the file that is created from the semver resource
 VERSION=`cat version/version`
 
 # Let's copy the settings.xml file to the correct location so that we have acces to the Infinity jar files
 mkdir ${HOME}/.m2
-cp resource-main-code/settings.xml ${HOME}/.m2/
+cp resource-main-code/scripts/ci/settings.xml ${HOME}/.m2/
 
 # First, build any dependent jars
 cd resource-main-code/PolicyNoteServiceDomain

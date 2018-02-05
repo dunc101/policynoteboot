@@ -6,7 +6,7 @@ PACKAGE_TYPE=$3
 
 # Let's copy the settings.xml file to the correct location so that we can look up the artifactId and groupId's with maven.
 mkdir ${HOME}/.m2
-cp resource-main-code/settings.xml ${HOME}/.m2/
+cp resource-main-code/scripts/ci/settings.xml ${HOME}/.m2/
 
 # Record my current directory
 MAIN_DIRECTORY=`pwd`
